@@ -21,6 +21,7 @@ CREATE TABLESPACE oracle_user_tbs datafile '/u01/app/oracle/oradata/ORCL/datafil
 ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' AUTOEXTEND ON NEXT 1M maxsize 20M; 
 
 ALTER USER oracle_user DEFAULT TABLESPACE oracle_user_tbs QUOTA UNLIMITED ON oracle_user_tbs; 
+ALTER USER oracle_user QUOTA UNLIMITED ON oracle_user_idx_tbs;
 
 GRANT CREATE TABLESPACE TO oracle_user; 
 GRANT SELECT ON V_$SQL TO oracle_user; 

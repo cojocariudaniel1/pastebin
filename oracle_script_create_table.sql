@@ -190,9 +190,12 @@ INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri
 VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 
 --============================================--
+    
+DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
 
 CREATE TABLESPACE oracle_user_idx_tbs
-    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf'
+    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_idx_tbs.dbf'
     SIZE 300K
     AUTOEXTEND OFF
     EXTENT MANAGEMENT LOCAL
@@ -206,7 +209,6 @@ CREATE TABLESPACE oracle_user_backup_tbs
     UNIFORM SIZE 100K;
     
 
-DROP TABLESPACE  oracle_user_idx_tbs;
 ALTER INDEX tratament_stoc_pk REBUILD tablespace oracle_user_idx_tbs;
 
 --============================================--

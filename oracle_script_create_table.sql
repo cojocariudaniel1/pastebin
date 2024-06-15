@@ -1,3 +1,26 @@
+--============================================--
+
+sqlplus sys/1395@orcl as sysdba
+
+ALTER SESSION SET CONTAINER = ORCLPDB;
+
+CREATE USER oracle_user IDENTIFIED BY oracle_user;
+
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE PROCEDURE TO oracle_user; 
+
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE PROCEDURE TO oracle_user; 
+
+CREATE TABLESPACE oracle_user_tbs datafile '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' size 3M;
+
+ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' AUTOEXTEND ON NEXT 1M maxsize 20M; 
+
+ALTER USER oracle_user DEFAULT TABLESPACE oracle_user_tbs QUOTA UNLIMITED ON oracle_user_tbs; 
+
+GRANT CREATE TABLESPACE TO oracle_user; 
+GRANT SELECT ON V_$SQL TO oracle_user; 
+
+
+--============================================--
 CREATE TABLE situatiestocuri (
     idsituatie            		INTEGER NOT NULL,
     cantitateintrare      		INTEGER NOT NULL,
@@ -80,6 +103,8 @@ CREATE TABLE angajati (
 );
 ALTER TABLE angajati ADD CONSTRAINT angajati_pk PRIMARY KEY ( idangajat );    
 
+--============================================--
+
 --INSERTURI ANGAJATI
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(1, TO_DATE('03/02/2020','DD/MM/YYYY'),'Medic');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(2, TO_DATE('11/06/2019','DD/MM/YYYY'),'Ingrijitor');
@@ -148,40 +173,59 @@ INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1113,'con
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1114,'consumabil', 404);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1115,'consumabil', 405);
 
+--============================================--
 
-ALTER DATABASE DATAFILE 'D:/oracle_table_space/test1_idx_tbs.dbf' AUTOEXTEND ON NEXT 300K maxsize 30M;
+CREATE TABLESPACE oracle_user_idx_tbs
+    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf'
+    SIZE 300K
+    AUTOEXTEND OFF
+    EXTENT MANAGEMENT LOCAL
+    UNIFORM SIZE 50K;
 
-ALTER INDEX ANGAJATI_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX FISAMEDICALA_TRATAMENT_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX NT_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX FISEMEDICALE_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX SITUATIESTOCURI_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX STOCURI_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX TRATAMENTE_PK rebuild TABLESPACE test1_idx_tbs;
-ALTER INDEX TRATAMENT_STOCK_PK rebuild TABLESPACE test1_idx_tbs;
+CREATE TABLESPACE oracle_user_backup_tbs 
+    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_backup_tbs.dbf'
+    SIZE 400K
+    AUTOEXTEND OFF
+    EXTENT MANAGEMENT LOCAL
+    UNIFORM SIZE 100K;
+    
+
+DROP TABLESPACE  oracle_user_idx_tbs;
+ALTER INDEX tratament_stoc_pk REBUILD tablespace oracle_user_idx_tbs;
+
+--============================================--
+
+
+ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' AUTOEXTEND ON NEXT 300K maxsize 30M;
+
+ALTER INDEX ANGAJATI_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX FISAMEDICALA_TRATAMENT_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX FISEMEDICALE_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX SITUATIESTOCURI_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX STOCURI_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX TRATAMENTE_PK rebuild TABLESPACE oracle_user_idx_tbs;
+ALTER INDEX TRATAMENT_STOC_PK REBUILD TABLESPACE oracle_user_idx_tbs;
 
 COLUMN SEGMENT_NAME format a20
 SELECT SEGMENT_NAME, tablespace_name from user_segments where segment_type = 'INDEX';
 
-
-CREATE TABLESPACE test1_idx_tbs datafile 'D:/oracle_table_space/test1_idx_tbs.dbf' SIZE 100M autoextend off extent 
-management local uniform size 500k; 
+--============================================--
 
 
 CREATE TABLE STOCURI_BACK_UP
 TABLESPACE test1_backup_tbs AS SELECT * FROM stocuri;
-
 CREATE TABLE tratamente_backup
 TABLESPACE test1_backup_tbs AS SELECT * FROM tratamente;
-
 CREATE TABLE ANGAJATI_BACKUP
 TABLESPACE test1_backup_tbs AS SELECT * FROM angajati;
 
 INSERT INTO ANGAJATI_BACKUP SELECT t.* FROM ANGAJATI_BACKUP t CROSS JOIN angajati_backup;
 
+--============================================--
 
 set arraysize 300
 set autotrace traceonly
 select idstoc,tipstoc,situatiestocuri_idsituatie from stocuri;
 
-GRANT SELECT ON V_$SQL TO c##test1;
+
+

@@ -119,6 +119,7 @@ ALTER TABLE fisemedicale
 
 --============================================--
 
+
 --inserturi angajati
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(1, TO_DATE('03/02/2020','DD/MM/YYYY'),'Medic');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(2, TO_DATE('11/06/2019','DD/MM/YYYY'),'Ingrijitor');
@@ -169,16 +170,16 @@ INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,d
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
 
 --inserturi fisamedicala_tratament
-INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
-VALUES (11,101);
-INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
-VALUES (12,102);
-INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
-VALUES (13,103);
-INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
-VALUES (14,104);
-INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
-VALUES (15,105);
+INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (101,11);
+INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (102,12);
+INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (103,13);
+INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (104,14);
+INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (105,15);
 
 --inserturi tratament_stoc
 INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)

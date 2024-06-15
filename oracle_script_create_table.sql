@@ -6,9 +6,15 @@ ALTER SESSION SET CONTAINER = ORCLPDB;
 
 DROP TABLESPACE ORACLE_USER_TBS INCLUDING CONTENTS AND DATAFILES CASCADE CONSTRAINTS;
 
+DROP USER oracle_user;
+
 CREATE USER oracle_user IDENTIFIED BY oracle_user;
 
 GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE PROCEDURE TO oracle_user; 
+
+
+DROP TABLESPACE  oracle_user_test INCLUDING CONTENTS AND DATAFILES;
+
 
 CREATE TABLESPACE oracle_user_tbs datafile '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' size 3M;
 
@@ -18,6 +24,7 @@ ALTER USER oracle_user DEFAULT TABLESPACE oracle_user_tbs QUOTA UNLIMITED ON ora
 
 GRANT CREATE TABLESPACE TO oracle_user; 
 GRANT SELECT ON V_$SQL TO oracle_user; 
+GRANT DROP TABLESPACE TO oracle_user;
 
 --SELECT tablespace_name, status, contents, extent_management, allocation_type, segment_space_management FROM dba_tablespaces;
 

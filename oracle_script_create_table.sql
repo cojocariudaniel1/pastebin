@@ -28,7 +28,9 @@ GRANT DROP TABLESPACE TO oracle_user;
 
 --SELECT tablespace_name, status, contents, extent_management, allocation_type, segment_space_management FROM dba_tablespaces;
 
+--============================================--
 
+sqlplus oracle_user/oracle_user@localhost:1521/orclpdb
 
 --============================================--
 -- Crearea tabelelor primare
@@ -95,7 +97,6 @@ ALTER TABLE tratament_stoc
         REFERENCES tratamente (idtratament);
 
 CREATE TABLE fisamedicala_tratament (
-    dataadministrare         DATE NOT NULL,
     tratamente_idtratament   INTEGER NOT NULL,
     fisemedicale_idfisamedicala INTEGER NOT NULL
 );

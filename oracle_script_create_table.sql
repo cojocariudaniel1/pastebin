@@ -109,7 +109,7 @@ ALTER TABLE fisemedicale
 
 --============================================--
 
---INSERTURI ANGAJATI
+--inserturi angajati
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(1, TO_DATE('03/02/2020','DD/MM/YYYY'),'Medic');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(2, TO_DATE('11/06/2019','DD/MM/YYYY'),'Ingrijitor');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(3, TO_DATE('23/11/2020','DD/MM/YYYY'),'Paramedic');
@@ -122,29 +122,7 @@ INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(9, TO_DATE('24/10/2021
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(10, TO_DATE('19/05/2020','DD/MM/YYYY'),'Ingrijitor');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(11, TO_DATE('20/08/2021','DD/MM/YYYY'),'Medic');
 
---inserturi fisa_mediacala
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-VALUES(11,'M','negru',178342,10.4,0.50,null,null,1); 
-INSERT INTO FISEMEDICALE (idfisamedicala,sex,culoare,seriecip,greutate,inaltime ,datanastere,varsta, angajati_idangajat) VALUES (12,'F',null,178344,20.1,0.64,TO_DATE('07/03/2019','DD/MM/YYYY'),2,11);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(13,'M','alb',178346,25.7,0.58,TO_DATE('20/05/2019','DD/MM/YYYY'),2,8);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(14,'M','bej',178348,22.7,0.45,null,null,11);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F',null,174245,0.5,0.20,TO_DATE('13/10/2017','DD/MM/YYYY'),5,8);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(16,'M','alb',178300,6,0.40,null,null,1);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(17,'F',null,12432,7.5,0.45,TO_DATE('20/05/2019','DD/MM/YYYY'),2,1);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(18,'F','maro',166445,0.5,0.20,null,null,11);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(19,'F',null,156945,0.5,0.20,TO_DATE('05/01/2020','DD/MM/YYYY'),1,8);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(20,'M','negru',17230,30,0.56,null,null,11);
-
---inserturi fisamedicata_tratament
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),101,11);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),103,15);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),103,18);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),110,17);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),105,12);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),107,13);
-INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala) VALUES(TO_DATE('16/06/2020','DD/MM/YYYY'),107,16);
-
---insert tratamente
+--inserturi tratamente
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (101,'Purevax RCPCh FeLV');
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (102,'Purevax RCPCh');
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (103,'Purevax RCP');
@@ -156,13 +134,7 @@ INSERT INTO tratamente (idtratament,denumiretratament) VALUES (108,'EURICAN DAPP
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (109,'RABISIN 10 doze');
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (110,'PRIMODOG');
 
---inserturi tratament_stoc
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament,stocuri_idstoc) VALUES (TO_DATE('16/06/2020','DD/MM/YYYY'), 101, 1110);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament,stocuri_idstoc) VALUES (TO_DATE('17/06/2020','DD/MM/YYYY'), 102, 1111);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament,stocuri_idstoc) VALUES (TO_DATE('18/06/2020','DD/MM/YYYY'), 103, 1112);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament,stocuri_idstoc) VALUES (TO_DATE('19/06/2020','DD/MM/YYYY'), 104, 1113);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament,stocuri_idstoc) VALUES (TO_DATE('20/06/2020','DD/MM/YYYY'), 105, 1114);
-
+--inserturi situatiestocuri
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (400,40, 15, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (401,30, 30, 30,TO_DATE('19/05/2021','DD/MM/YYYY'));
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (402,100, 52, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
@@ -170,12 +142,46 @@ INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,neces
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (404,63, 20, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (405,40, 20, 10,TO_DATE('19/05/2021','DD/MM/YYYY'));
 
+--inserturi stocuri
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1110,'consumabil', 400);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1111,'consumabil', 401);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1112,'consumabil', 402);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1113,'consumabil', 403);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1114,'consumabil', 404);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1115,'consumabil', 405);
+
+--inserturi fisa_mediacala
+INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
+VALUES(11,'M','negru',178342,10.4,0.50,null,null,1); 
+INSERT INTO FISEMEDICALE (idfisamedicala,sex,culoare,seriecip,greutate,inaltime ,datanastere,varsta, angajati_idangajat) VALUES (12,'F',null,178344,20.1,0.64,TO_DATE('07/03/2019','DD/MM/YYYY'),2,11);
+INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(13,'M','alb',178346,25.7,0.58,TO_DATE('20/05/2019','DD/MM/YYYY'),2,8);
+INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(14,'M','bej',178348,22.7,0.45,null,null,11);
+INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
+
+--inserturi fisamedicala_tratament
+INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
+VALUES (11,101);
+INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
+VALUES (12,102);
+INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
+VALUES (13,103);
+INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
+VALUES (14,104);
+INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtratament)
+VALUES (15,105);
+
+--inserturi tratament_stoc
+INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
+VALUES (101, 1110);
+INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
+VALUES (102, 1111);
+INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
+VALUES (103, 1112);
+INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
+VALUES (104, 1113);
+INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
+VALUES (105, 1114);
+
 
 --============================================--
 

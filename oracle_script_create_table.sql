@@ -171,17 +171,16 @@ INSERT INTO fisamedicala_tratament(fisamedicala_idfisamedicala, tratamente_idtra
 VALUES (15,105);
 
 --inserturi tratament_stoc
-INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
-VALUES (101, 1110);
-INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
-VALUES (102, 1111);
-INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
-VALUES (103, 1112);
-INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
-VALUES (104, 1113);
-INSERT INTO tratament_stoc(tratamente_idtratament, stocuri_idstoc)
-VALUES (105, 1114);
-
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),101, 1110);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'), 102, 1111);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),103, 1112);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104, 1113);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 
 --============================================--
 

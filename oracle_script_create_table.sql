@@ -244,11 +244,13 @@ END;
 BEGIN
 FOR i IN 1401..200450 LOOP
 INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-        VALUES(i, 'M', null, dbms_random.value(18500,19000), dbms_random.value(0,15), dbms_random.value(1,3),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2018-01-03','J'),TO_CHAR(DATE '2018-12-29','J'))),'J'),
+        VALUES(i, 'M', null, dbms_random.value(18500,19000), dbms_random.value(0,90), dbms_random.value(1,9),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2018-01-03','J'),TO_CHAR(DATE '2018-12-29','J'))),'J'),
     null, dbms_random.value(1,11));
 END LOOP;
 COMMIT; 
 END;
+
+
 
 ---===============================
 

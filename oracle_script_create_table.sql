@@ -122,6 +122,9 @@ ALTER TABLE fisemedicale
 --============================================--
 
 
+
+
+
 --inserturi angajati
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(1, TO_DATE('03/02/2020','DD/MM/YYYY'),'Medic');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(2, TO_DATE('11/06/2019','DD/MM/YYYY'),'Ingrijitor');
@@ -136,7 +139,7 @@ INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(10, TO_DATE('19/05/202
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(11, TO_DATE('20/08/2021','DD/MM/YYYY'),'Medic');
 
 BEGIN
-FOR i IN 501..1000 LOOP
+FOR i IN 12..1000 LOOP
 INSERT INTO angajati (idangajat,dataangajare, post)
     VALUES(i, TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'), 'Asistent');
 END LOOP;
@@ -147,16 +150,16 @@ alter table angajati add nume VARCHAR2(50);
 --==========================================--
 
 --inserturi situatiestocuri
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (400,40, 15, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (401,30, 30, 30,TO_DATE('19/05/2021','DD/MM/YYYY'));
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (402,100, 52, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (403,35, 11 , 19,TO_DATE('19/05/2021','DD/MM/YYYY'));
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (404,63, 20, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
-INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (405,40, 20, 10,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (1,40, 15, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (2,30, 30, 30,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (3,100, 52, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (4,35, 11 , 19,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (5,63, 20, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
+INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (6,40, 20, 10,TO_DATE('19/05/2021','DD/MM/YYYY'));
 ----========================----
 
 BEGIN
-FOR i IN 406..10500 LOOP
+FOR i IN 7..10500 LOOP
 INSERT INTO situatiestocuri (idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare,dataprimirestoc)
     VALUES(i, dbms_random.value(1,100), dbms_random.value(1,100), dbms_random.value(1,100), TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2021-01-03','J'),TO_CHAR(DATE '2022-12-29','J'))),'J'));
 END LOOP;
@@ -165,17 +168,17 @@ END;
 
 
 --inserturi stocuri
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1110,'consumabil', 400);
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1111,'consumabil', 401);
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1112,'consumabil', 402);
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1113,'consumabil', 403);
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1114,'consumabil', 404);
-INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1115,'consumabil', 405);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1,'consumabil', 1);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (2,'consumabil', 2);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (3,'consumabil', 3);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (4,'consumabil', 4);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (5,'consumabil', 5);
+INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (6,'consumabil', 6);
 
 -------======================----
-
+SELECT * FROM stocuri;
 BEGIN
-  FOR i IN 1116..11500 LOOP
+  FOR i IN 7..10500 LOOP
     INSERT INTO stocuri (idstoc, tipstoc, situatiestocuri_idsituatie)
     VALUES (
       i,
@@ -184,7 +187,7 @@ BEGIN
         WHEN dbms_random.value(1, 3) < 3 THEN 'durabil'
         ELSE 'perisabil'
       END,
-      ROUND(dbms_random.value(400, 10500))
+      ROUND(dbms_random.value(1, 10500))
     );
   END LOOP;
   COMMIT;
@@ -192,22 +195,12 @@ END;
 
 -----====================----
 
-
---inserturi fisa_mediacala
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-VALUES(11,'M','negru',178342,10.4,0.50,null,null,1); 
-INSERT INTO FISEMEDICALE (idfisamedicala,sex,culoare,seriecip,greutate,inaltime ,datanastere,varsta, angajati_idangajat) VALUES (12,'F',null,178344,20.1,0.64,TO_DATE('07/03/2019','DD/MM/YYYY'),2,11);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(13,'M','alb',178346,25.7,0.58,TO_DATE('20/05/2019','DD/MM/YYYY'),2,8);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(14,'M','bej',178348,22.7,0.45,null,null,11);
-INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
-
--- inserturi tratament
 DECLARE
     random_n NUMBER;
     tratament VARCHAR2(50);
 BEGIN
-    FOR i IN 1..21000 LOOP
-        random_n := TRUNC(dbms_random.value(1, 6)); 
+    FOR i IN 1..1000 LOOP
+        random_n := TRUNC(dbms_random.value(1, 6)); -- Generează un număr aleatoriu între 1 și 5
         
         IF random_n = 1 THEN
             tratament := 'Paracetamol';
@@ -220,16 +213,22 @@ BEGIN
         ELSIF random_n = 5 THEN
             tratament := 'Sirop de tuse';
         ELSE
-            tratament := 'Tratament necunoscut'; 
+            tratament := 'Tratament necunoscut'; -- În caz că nu se potrivește nicio condiție
         END IF;
         
+        -- Inserare în tabel
         INSERT INTO tratamente (
           idtratament, denumiretratament
         ) VALUES (
           i, tratament
         );
     END LOOP;
+    
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Înregistrările au fost inserate cu succes.');
 END;
+
+SELECT * FROM fisamedicala_tratament;
 
 --inserturi fisamedicala_tratament
 BEGIN
@@ -238,43 +237,21 @@ BEGIN
       dataadministrare, tratamente_idtratament, fisemedicale_idfisamedicala
     ) VALUES (
       TRUNC(SYSDATE - dbms_random.value(0, 365)),  -- Dată aleatoare în ultimul an
-      ROUND(dbms_random.value(1, 100)),  -- Id tratament între 1 și 100 (numărul de tratamente inserate)
+      ROUND(dbms_random.value(1, 1000)),  -- Id tratament între 1 și 100 (numărul de tratamente inserate)
       ROUND(dbms_random.value(1, 200000))  -- Id fisamedicala între 1 și 200000 (numărul de înregistrări în fisamedicale)
     );
   END LOOP;
   COMMIT;
 END;
 
+
 ----===================
-BEGIN
-FOR i IN 21..1000 LOOP
-INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-    VALUES(i, 'M', null, dbms_random.value(17200,18000), dbms_random.value(0,30), dbms_random.value(1,2),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'),
-    null, dbms_random.value(1,11));
-END LOOP;
-COMMIT; 
-END;
+
+SELECT * FROM FISEMEDICALE;
+
 
 BEGIN
-FOR i IN 1200..1400 LOOP
-INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-    VALUES(i, 'F', null, dbms_random.value(17200,18000), dbms_random.value(0,30), dbms_random.value(1,2),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'),
-    null, dbms_random.value(1,11));
-END LOOP;
-COMMIT; 
-END;
-
-BEGIN
-FOR i IN 1401..200450 LOOP
-INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
-        VALUES(i, 'M', null, dbms_random.value(18500,19000), dbms_random.value(0,90), dbms_random.value(1,9),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2018-01-03','J'),TO_CHAR(DATE '2018-12-29','J'))),'J'),
-    null, dbms_random.value(1,11));
-END LOOP;
-COMMIT; 
-END;
-
-BEGIN
-  FOR i IN 100..200000 LOOP  -- Adaptează intervalul pentru a introduce numărul dorit de rânduri
+  FOR i IN 1..200000 LOOP  -- Adaptează intervalul pentru a introduce numărul dorit de rânduri
     INSERT INTO fisemedicale (
       idfisamedicala, sex, culoare, seriecip, greutate, inaltime, datanastere, varsta, angajati_idangajat
     ) VALUES (
@@ -313,7 +290,6 @@ INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri
 VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104, 1113);
 INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
 VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
-
 --============================================--
     
 DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;

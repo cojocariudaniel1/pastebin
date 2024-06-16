@@ -145,17 +145,6 @@ END;
 
 alter table angajati add nume VARCHAR2(50);
 --==========================================--
---inserturi tratamente
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (101,'Purevax RCPCh FeLV');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (102,'Purevax RCPCh');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (103,'Purevax RCP');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (104,'RABISIN 1 doz?');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (105,'EURICAN DAPPi L Multi');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (106,'EURICAN DAPPi T Multi');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (107,'EURICAN L Multi');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (108,'EURICAN DAPPi');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (109,'RABISIN 10 doze');
-INSERT INTO tratamente (idtratament,denumiretratament) VALUES (110,'PRIMODOG');
 
 --inserturi situatiestocuri
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (400,40, 15, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
@@ -211,6 +200,36 @@ INSERT INTO FISEMEDICALE (idfisamedicala,sex,culoare,seriecip,greutate,inaltime 
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(13,'M','alb',178346,25.7,0.58,TO_DATE('20/05/2019','DD/MM/YYYY'),2,8);
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(14,'M','bej',178348,22.7,0.45,null,null,11);
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
+
+DECLARE
+  -- Variables for product names
+  product_names VARCHAR2(100);
+BEGIN
+  -- Insert tratamente
+  FOR i IN 1..100 LOOP
+    INSERT INTO tratamente (idtratament, denumiretratament) 
+    VALUES (i, 'Tratament ' || i);
+  END LOOP;
+  
+  -- Insert 5 random medical products
+  FOR j IN 1..5 LOOP
+    -- Example placeholder names for demonstration
+    product_names := CASE j
+                      WHEN 1 THEN 'Paracetamol'
+                      WHEN 2 THEN 'Ibuprofen'
+                      WHEN 3 THEN 'Aspirin'
+                      WHEN 4 THEN 'Antibiotic'
+                      WHEN 5 THEN 'Cough Syrup'
+                    END;
+    
+    INSERT INTO tratamente (idtratament, denumiretratament)
+    VALUES (100 + j, product_names);
+  END LOOP;
+  
+  -- Commit changes
+  COMMIT;
+END;
+
 
 --inserturi fisamedicala_tratament
 BEGIN

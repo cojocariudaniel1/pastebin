@@ -425,6 +425,23 @@ FROM angajati a
 JOIN fisemedicale f ON a.idangajat = f.angajati_idangajat
 WHERE f.inaltime > 199 
 
+-----
+
+
+drop index index_tratament_test;
+drop index fisemedicale_test;
+drop index fisamedicala_tratament_test;
+
+create index fisemedicale_test on fisemedicale(idfisamedicala,inaltime ); 
+create index fisamedicala_tratament_test on fisamedicala_tratament(dataadministrare);
+create index index_tratament_test on tratamente(denumiretratament);
+
+SELECT f.idfisamedicala, f.sex, f.culoare, f.seriecip, f.greutate, f.inaltime, t.idtratament, t.denumiretratament, ft.dataadministrare
+FROM fisemedicale f
+JOIN fisamedicala_tratament ft ON f.idfisamedicala = ft.fisemedicale_idfisamedicala
+JOIN tratamente t ON ft.tratamente_idtratament = t.idtratament
+WHERE t.denumiretratament = 'Paracetamol'
+ORDER BY ft.dataadministrare;
 
 
 

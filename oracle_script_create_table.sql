@@ -252,7 +252,7 @@ COMMIT;
 END;
 
 BEGIN
-  FOR i IN 1..1000 LOOP  -- Adaptează intervalul pentru a introduce numărul dorit de rânduri
+  FOR i IN 100..200000 LOOP  -- Adaptează intervalul pentru a introduce numărul dorit de rânduri
     INSERT INTO fisemedicale (
       idfisamedicala, sex, culoare, seriecip, greutate, inaltime, datanastere, varsta, angajati_idangajat
     ) VALUES (
@@ -270,11 +270,12 @@ BEGIN
       ROUND(dbms_random.value(150, 200)),
       TRUNC(SYSDATE - dbms_random.value(6570, 25550)), -- Date between 18 and 70 years ago
       ROUND(dbms_random.value(18, 70)),
-      ROUND(dbms_random.value(1, 1000)) -- Assuming there are 1000 employees
+      ROUND(dbms_random.value(501, 999)) -- Assuming there are 1000 employees
     );
   END LOOP;
   COMMIT;
 END;
+
 
 
 ---===============================

@@ -374,10 +374,17 @@ create index index_fisemedicale_test on fisemedicale(idfisamedicala, seriecip,gr
 
 drop index fisemedicale_test
 Create  index fisemedicale_test on fisemedicale(greutate);
-
 set arraysize 300
 set autotrace traceonly
 SELECT * FROM fisemedicale WHERE greutate < 50;
+
+
+
+drop index tratamente_test;
+Create  index tratamente_test on Tratamente(Denumiretratament);
+set arraysize 300
+set autotrace traceonly
+SELECT * From Tratamente Where Denumiretratament Like 'Paracetamol';
 
 
 

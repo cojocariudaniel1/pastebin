@@ -461,6 +461,19 @@ SELECT 'cp ' || file_name || ' oracle_user_backup'
 
 cp oracle_user_backup/oracle_user_test.dbf /u01/app/oracle/oradata/ORCL/datafile/
 
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc) VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),107, 1116);
+
+alter database datafile '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' offline;
+RECOVER DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf';
+ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' online;
+SELECT * FROM tratament_stoc where stocuri_idstoc = 1116;
+
+
+DROP TABLE tratament_stoc;
+
+
+
+
 
 
 

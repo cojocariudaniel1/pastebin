@@ -141,6 +141,7 @@ INSERT INTO angajati (idangajat,dataangajare, post)
 END LOOP;
 COMMIT; 
 END;
+
 alter table angajati add nume VARCHAR2(50);
 --==========================================--
 --inserturi tratamente

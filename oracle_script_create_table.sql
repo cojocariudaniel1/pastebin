@@ -32,8 +32,9 @@ GRANT DROP TABLESPACE TO oracle_user;
 --============================================--
 
 sqlplus oracle_user/oracle_user@localhost:1521/orclpdb
-
---============================================--
+    
+DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE oracle_user_backup_tbs INCLUDING CONTENTS AND DATAFILES;
 -- Crearea tabelelor primare
 CREATE TABLE angajati (
     idangajat      INTEGER NOT NULL,
@@ -117,10 +118,6 @@ ALTER TABLE fisamedicala_tratament
 ALTER TABLE fisemedicale
     ADD CONSTRAINT fisemedicale_angajati_fk FOREIGN KEY (angajati_idangajat)
         REFERENCES angajati (idangajat);
-
-
---============================================--
-
 
 
 
@@ -230,19 +227,6 @@ END;
 
 SELECT * FROM fisamedicala_tratament;
 
---inserturi fisamedicala_tratament
-BEGIN
-  FOR i IN 1..200000 LOOP  -- Numărul de înregistrări pe care vrei să le adaugi
-    INSERT INTO fisamedicala_tratament (
-      dataadministrare, tratamente_idtratament, fisemedicale_idfisamedicala
-    ) VALUES (
-      TRUNC(SYSDATE - dbms_random.value(0, 365)),  -- Dată aleatoare în ultimul an
-      ROUND(dbms_random.value(1, 1000)),  -- Id tratament între 1 și 100 (numărul de tratamente inserate)
-      ROUND(dbms_random.value(1, 200000))  -- Id fisamedicala între 1 și 200000 (numărul de înregistrări în fisamedicale)
-    );
-  END LOOP;
-  COMMIT;
-END;
 
 
 ----===================
@@ -251,7 +235,7 @@ SELECT * FROM FISEMEDICALE;
 
 
 BEGIN
-  FOR i IN 1..200000 LOOP  -- Adaptează intervalul pentru a introduce numărul dorit de rânduri
+  FOR i IN 1..100000 LOOP  -- 
     INSERT INTO fisemedicale (
       idfisamedicala, sex, culoare, seriecip, greutate, inaltime, datanastere, varsta, angajati_idangajat
     ) VALUES (
@@ -276,6 +260,34 @@ BEGIN
 END;
 
 
+--inserturi fisamedicala_tratament
+BEGIN
+  FOR i IN 1..200000 LOOP  -- Numărul de înregistrări pe care vrei să le adaugi
+    INSERT INTO fisamedicala_tratament (
+      dataadministrare, tratamente_idtratament, fisemedicale_idfisamedicala
+    ) VALUES (
+      TRUNC(SYSDATE - dbms_random.value(0, 365)),  -- Dată aleatoare în ultimul an
+      ROUND(dbms_random.value(1, 1000)),  -- Id tratament între 1 și 100 (numărul de tratamente inserate)
+      ROUND(dbms_random.value(1, 200000))  -- Id fisamedicala între 1 și 200000 (numărul de înregistrări în fisamedicale)
+    );
+  END LOOP;
+  COMMIT;
+END;
+
+---===============================
+
+--inserturi tratament_stoc
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),101, 1110);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'), 102, 1111);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),103, 1112);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104, 1113);
+INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
+
 
 ---===============================
 
@@ -291,9 +303,6 @@ VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104, 1113);
 INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
 VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 --============================================--
-    
-DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
-DROP TABLESPACE oracle_user_backup_tbs INCLUDING CONTENTS AND DATAFILES;
 
 CREATE TABLESPACE oracle_user_idx_tbs
     DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_idx_tbs.dbf'

@@ -443,6 +443,14 @@ JOIN tratamente t ON ft.tratamente_idtratament = t.idtratament
 WHERE t.denumiretratament = 'Paracetamol'
 ORDER BY ft.dataadministrare;
 
+-- In terminal --
+sqlplus / as sysdba
+ALTER SESSION SET CONTAINER = CDB$ROOT;
+shutdown imediate;
+startup mount
+alter database archivelog;
+
+
 
 
 

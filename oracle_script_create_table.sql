@@ -136,12 +136,11 @@ INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(11, TO_DATE('20/08/202
 
 BEGIN
 FOR i IN 501..1000 LOOP
-INSERT INTO angajati (idangajat,dataangajare, post, nume)
-    VALUES(i, TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'), 'Asistent', 'Madalina');
+INSERT INTO angajati (idangajat,dataangajare, post)
+    VALUES(i, TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'), 'Asistent');
 END LOOP;
 COMMIT; 
 END;
-
 alter table angajati add nume VARCHAR2(50);
 --==========================================--
 --inserturi tratamente

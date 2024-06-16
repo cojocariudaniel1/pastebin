@@ -258,7 +258,7 @@ VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 --============================================--
     
 DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
-DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
+DROP TABLESPACE oracle_user_backup_tbs INCLUDING CONTENTS AND DATAFILES;
 
 CREATE TABLESPACE oracle_user_idx_tbs
     DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_idx_tbs.dbf'

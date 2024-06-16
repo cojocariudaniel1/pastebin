@@ -201,12 +201,13 @@ INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,d
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(14,'M','bej',178348,22.7,0.45,null,null,11);
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
 
+-- inserturi tratament
 DECLARE
     random_n NUMBER;
     tratament VARCHAR2(50);
 BEGIN
-    FOR i IN 100..300 LOOP
-        random_n := TRUNC(dbms_random.value(1, 6)); -- Generează un număr aleatoriu între 1 și 5
+    FOR i IN 1..21000 LOOP
+        random_n := TRUNC(dbms_random.value(1, 6)); 
         
         IF random_n = 1 THEN
             tratament := 'Paracetamol';
@@ -219,19 +220,15 @@ BEGIN
         ELSIF random_n = 5 THEN
             tratament := 'Sirop de tuse';
         ELSE
-            tratament := 'Tratament necunoscut'; -- În caz că nu se potrivește nicio condiție
+            tratament := 'Tratament necunoscut'; 
         END IF;
         
-        -- Inserare în tabel
         INSERT INTO tratamente (
           idtratament, denumiretratament
         ) VALUES (
           i, tratament
         );
     END LOOP;
-    
-    COMMIT;
-    DBMS_OUTPUT.PUT_LINE('Înregistrările au fost inserate cu succes.');
 END;
 
 --inserturi fisamedicala_tratament

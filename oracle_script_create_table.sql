@@ -185,12 +185,21 @@ INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1115,'con
 -------======================----
 
 BEGIN
-FOR i IN 1116..11500 LOOP
-INSERT INTO stocuri (idstoc,tipstoc,situatiestocuri_idsituatie)
-    VALUES(i, 'consumabil', dbms_random.value(400,10500));
-END LOOP;
-COMMIT; 
+  FOR i IN 1116..11500 LOOP
+    INSERT INTO stocuri (idstoc, tipstoc, situatiestocuri_idsituatie)
+    VALUES (
+      i,
+      CASE
+        WHEN dbms_random.value(1, 3) < 2 THEN 'consumabil'
+        WHEN dbms_random.value(1, 3) < 3 THEN 'durabil'
+        ELSE 'perisabil'
+      END,
+      ROUND(dbms_random.value(400, 10500))
+    );
+  END LOOP;
+  COMMIT;
 END;
+
 -----====================----
 
 

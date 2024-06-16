@@ -237,6 +237,39 @@ BEGIN
   COMMIT;
 END;
 
+-- Definește un tip de tabel pentru a stoca denumirile tratamentelor posibile
+CREATE OR REPLACE TYPE denumiri_tratamente_t AS TABLE OF VARCHAR2(50);
+/
+
+-- Inserează denumirile tratamentelor posibile într-un obiect de tip tabel
+DECLARE
+    denumiri_tratamente denumiri_tratamente_t := denumiri_tratamente_t(
+        'Paracetamol',
+        'Ibuprofen',
+        'Aspirin',
+        'Antibiotic',
+        'Sirop de tuse',
+        -- Poți adăuga și alte denumiri aici
+    );
+    num_entries CONSTANT INTEGER := 1000;
+BEGIN
+    FOR i IN 1..num_entries LOOP
+        -- Selectează 5 denumiri aleatorii din lista de denumiri
+        INSERT INTO tratamente (idtratament, denumiretratament)
+        SELECT i, column_value
+        FROM TABLE(
+            CAST(
+                MULTISET(
+                    SELECT column_value
+                    FROM TABLE(denumiri_tratamente)
+                    SAMPLE(5)
+                ) AS denumiri_tratamente_t
+            )
+        );
+    END LOOP;
+    COMMIT;
+END;
+/
 
 --inserturi fisamedicala_tratament
 BEGIN

@@ -202,10 +202,11 @@ INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,d
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
 
 DECLARE
-  -- Variables for product names
+  -- Variables for product names and idtratament
   product_names VARCHAR2(100);
+  new_id NUMBER;
 BEGIN
-  -- Insert tratamente
+  -- Insert tratamente (assuming there are already 100 treatments with IDs from 1 to 100)
   FOR i IN 1..100 LOOP
     INSERT INTO tratamente (idtratament, denumiretratament) 
     VALUES (i, 'Tratament ' || i);
@@ -213,6 +214,12 @@ BEGIN
   
   -- Insert 5 random medical products
   FOR j IN 1..5 LOOP
+    -- Generate a new unique idtratament
+    SELECT MAX(idtratament) + 1 INTO new_id FROM tratamente;
+    IF new_id IS NULL THEN
+      new_id := 101; -- If table is empty, start from 101
+    END IF;
+    
     -- Example placeholder names for demonstration
     product_names := CASE j
                       WHEN 1 THEN 'Paracetamol'
@@ -223,7 +230,7 @@ BEGIN
                     END;
     
     INSERT INTO tratamente (idtratament, denumiretratament)
-    VALUES (100 + j, product_names);
+    VALUES (new_id, product_names);
   END LOOP;
   
   -- Commit changes

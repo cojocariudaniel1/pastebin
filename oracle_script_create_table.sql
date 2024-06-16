@@ -387,5 +387,11 @@ set autotrace traceonly
 SELECT * From Tratamente Where Denumiretratament Like 'Paracetamol';
 
 
+drop index situatiestocuri_test;
+Create index situatiestocuri_test on situatiestocuri(necesaraprovizionare, idsituatie);
+
+set arraysize 300
+set autotrace traceonly
+SELECT idsituatie, necesaraprovizionare FROM situatiestocuri WHERE necesaraprovizionare > 99;
 
 

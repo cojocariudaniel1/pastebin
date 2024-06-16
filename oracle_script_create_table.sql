@@ -35,6 +35,21 @@ sqlplus oracle_user/oracle_user@localhost:1521/orclpdb
     
 DROP TABLESPACE oracle_user_idx_tbs INCLUDING CONTENTS AND DATAFILES;
 DROP TABLESPACE oracle_user_backup_tbs INCLUDING CONTENTS AND DATAFILES;
+
+
+CREATE TABLESPACE oracle_user_idx_tbs
+    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_idx_tbs.dbf'
+    SIZE 50M
+    AUTOEXTEND ON
+    EXTENT MANAGEMENT LOCAL
+    UNIFORM SIZE 500K;
+
+CREATE TABLESPACE oracle_user_backup_tbs 
+    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_backup_tbs.dbf'
+    SIZE 50M
+    AUTOEXTEND ON
+    EXTENT MANAGEMENT LOCAL
+    UNIFORM SIZE 500K;
 -- Crearea tabelelor primare
 CREATE TABLE angajati (
     idangajat      INTEGER NOT NULL,
@@ -262,18 +277,18 @@ END;
 
 --inserturi fisamedicala_tratament
 BEGIN
-  FOR i IN 1..200000 LOOP  -- Numărul de înregistrări pe care vrei să le adaugi
+  FOR i IN 1..1000 LOOP  -- Numărul de înregistrări pe care vrei să le adaugi
     INSERT INTO fisamedicala_tratament (
       dataadministrare, tratamente_idtratament, fisemedicale_idfisamedicala
     ) VALUES (
       TRUNC(SYSDATE - dbms_random.value(0, 365)),  -- Dată aleatoare în ultimul an
       ROUND(dbms_random.value(1, 1000)),  -- Id tratament între 1 și 100 (numărul de tratamente inserate)
-      ROUND(dbms_random.value(1, 200000))  -- Id fisamedicala între 1 și 200000 (numărul de înregistrări în fisamedicale)
+      ROUND(dbms_random.value(300, 2000))  -- Id fisamedicala între 1 și 200000 (numărul de înregistrări în fisamedicale)
     );
   END LOOP;
   COMMIT;
 END;
-
+SELECT * FROM fisamedicala_tratament;
 ---===============================
 
 --inserturi tratament_stoc
@@ -289,36 +304,8 @@ INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri
 VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 
 
----===============================
-
---inserturi tratament_stoc
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
-VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),101, 1110);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
-VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'), 102, 1111);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
-VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),103, 1112);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
-VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104, 1113);
-INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)
-VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105, 1114);
 --============================================--
 
-CREATE TABLESPACE oracle_user_idx_tbs
-    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_idx_tbs.dbf'
-    SIZE 300K
-    AUTOEXTEND OFF
-    EXTENT MANAGEMENT LOCAL
-    UNIFORM SIZE 50K;
-
-CREATE TABLESPACE oracle_user_backup_tbs 
-    DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_backup_tbs.dbf'
-    SIZE 400K
-    AUTOEXTEND OFF
-    EXTENT MANAGEMENT LOCAL
-    UNIFORM SIZE 100K;
-    
---============================================--
 
 ALTER INDEX ANGAJATI_PK rebuild TABLESPACE oracle_user_idx_tbs;
 ALTER INDEX FISAMEDICALA_TRATAMENT_PK rebuild TABLESPACE oracle_user_idx_tbs;

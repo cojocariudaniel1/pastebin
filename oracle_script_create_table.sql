@@ -46,13 +46,14 @@ CREATE TABLE fisemedicale (
     idfisamedicala    INTEGER NOT NULL,
     sex               VARCHAR2(10) NOT NULL,
     culoare           VARCHAR2(25),
-    seriecip          INTEGER NOT NULL,
-    greutate          NUMBER(2) NOT NULL,
-    inaltime          NUMBER(2) NOT NULL,
+    seriecip          NUMBER NOT NULL,
+    greutate          NUMBER(3) NOT NULL,
+    inaltime          NUMBER(3) NOT NULL,
     datanastere       DATE,
     varsta            INTEGER,
     angajati_idangajat INTEGER NOT NULL
 );
+
 ALTER TABLE fisemedicale ADD CONSTRAINT fisemedicale_pk PRIMARY KEY (idfisamedicala);
 
 CREATE TABLE tratamente (

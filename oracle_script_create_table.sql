@@ -274,13 +274,7 @@ CREATE TABLESPACE oracle_user_backup_tbs
     EXTENT MANAGEMENT LOCAL
     UNIFORM SIZE 100K;
     
-
-ALTER INDEX tratament_stoc_pk REBUILD tablespace oracle_user_idx_tbs;
-
 --============================================--
-
-
-ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf' AUTOEXTEND ON NEXT 300K maxsize 30M;
 
 ALTER INDEX ANGAJATI_PK rebuild TABLESPACE oracle_user_idx_tbs;
 ALTER INDEX FISAMEDICALA_TRATAMENT_PK rebuild TABLESPACE oracle_user_idx_tbs;

@@ -134,6 +134,16 @@ INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(9, TO_DATE('24/10/2021
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(10, TO_DATE('19/05/2020','DD/MM/YYYY'),'Ingrijitor');
 INSERT INTO ANGAJATI(idangajat,dataangajare, post) VALUES(11, TO_DATE('20/08/2021','DD/MM/YYYY'),'Medic');
 
+BEGIN
+FOR i IN 501..1000 LOOP
+INSERT INTO angajati (idangajat,dataangajare, post, nume)
+    VALUES(i, TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'), 'Asistent', 'Madalina');
+END LOOP;
+COMMIT; 
+END;
+
+alter table angajati add nume VARCHAR2(50);
+--==========================================--
 --inserturi tratamente
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (101,'Purevax RCPCh FeLV');
 INSERT INTO tratamente (idtratament,denumiretratament) VALUES (102,'Purevax RCPCh');
@@ -153,6 +163,16 @@ INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,neces
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (403,35, 11 , 19,TO_DATE('19/05/2021','DD/MM/YYYY'));
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (404,63, 20, 0,TO_DATE('19/05/2021','DD/MM/YYYY'));
 INSERT INTO situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare, dataprimirestoc) VALUES (405,40, 20, 10,TO_DATE('19/05/2021','DD/MM/YYYY'));
+----========================----
+
+BEGIN
+FOR i IN 406..10500 LOOP
+INSERT INTO situatiestocuri (idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare,dataprimirestoc)
+    VALUES(i, dbms_random.value(1,100), dbms_random.value(1,100), dbms_random.value(1,100), TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2021-01-03','J'),TO_CHAR(DATE '2022-12-29','J'))),'J'));
+END LOOP;
+COMMIT; 
+END;
+
 
 --inserturi stocuri
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1110,'consumabil', 400);
@@ -161,6 +181,18 @@ INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1112,'con
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1113,'consumabil', 403);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1114,'consumabil', 404);
 INSERT INTO stocuri(idstoc,tipstoc,situatiestocuri_idsituatie) VALUES (1115,'consumabil', 405);
+
+-------======================----
+
+BEGIN
+FOR i IN 1116..11500 LOOP
+INSERT INTO stocuri (idstoc,tipstoc,situatiestocuri_idsituatie)
+    VALUES(i, 'consumabil', dbms_random.value(400,10500));
+END LOOP;
+COMMIT; 
+END;
+-----====================----
+
 
 --inserturi fisa_mediacala
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
@@ -181,6 +213,36 @@ INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisame
 VALUES (104,14);
 INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
 VALUES (105,15);
+
+----===================
+BEGIN
+FOR i IN 21..1000 LOOP
+INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
+    VALUES(i, 'M', null, dbms_random.value(17200,18000), dbms_random.value(0,30), dbms_random.value(1,2),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'),
+    null, dbms_random.value(1,11));
+END LOOP;
+COMMIT; 
+END;
+
+BEGIN
+FOR i IN 1200..1400 LOOP
+INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
+    VALUES(i, 'F', null, dbms_random.value(17200,18000), dbms_random.value(0,30), dbms_random.value(1,2),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2019-01-03','J'),TO_CHAR(DATE '2021-12-29','J'))),'J'),
+    null, dbms_random.value(1,11));
+END LOOP;
+COMMIT; 
+END;
+
+BEGIN
+FOR i IN 1401..1450 LOOP
+INSERT INTO "FISEMEDICALE" (idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta,angajati_idangajat)
+        VALUES(i, 'M', null, dbms_random.value(18500,19000), dbms_random.value(0,15), dbms_random.value(1,3),TO_DATE(TRUNC(DBMS_RANDOM.VALUE(TO_CHAR(DATE '2018-01-03','J'),TO_CHAR(DATE '2018-12-29','J'))),'J'),
+    null, dbms_random.value(1,11));
+END LOOP;
+COMMIT; 
+END;
+
+---===============================
 
 --inserturi tratament_stoc
 INSERT INTO tratament_stoc(datapreluaretratament,tratamente_idtratament, stocuri_idstoc)

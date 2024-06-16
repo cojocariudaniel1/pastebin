@@ -415,6 +415,17 @@ ORDER BY f.varsta;
 
 --------
 
+drop index fisemedicale_test;
+drop index index_angajati_test;
+
+create index fisemedicale_test on fisemedicale(idfisamedicala,inaltime ); 
+create index index_angajati_test on angajati(idangajat, dataangajare, post);
+SELECT a.idangajat, a.dataangajare, a.post, f.idfisamedicala, f.sex, f.culoare, f.seriecip, f.greutate, f.inaltime, f.datanastere, f.varsta
+FROM angajati a
+JOIN fisemedicale f ON a.idangajat = f.angajati_idangajat
+WHERE f.inaltime > 199 
+
+
 
 
 

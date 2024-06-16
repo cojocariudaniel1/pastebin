@@ -203,17 +203,16 @@ INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,d
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
 
 --inserturi fisamedicala_tratament
-INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
-VALUES (101,11);
-INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
-VALUES (102,12);
-INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
-VALUES (103,13);
-INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
-VALUES (104,14);
-INSERT INTO fisamedicala_tratament(tratamente_idtratament, fisemedicale_idfisamedicala)
-VALUES (105,15);
-
+INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),101,11);
+INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),102,12);
+INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),103,13);
+INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),104,14);
+INSERT INTO fisamedicala_tratament(dataadministrare,tratamente_idtratament, fisemedicale_idfisamedicala)
+VALUES (TO_DATE('16/02/2021','DD/MM/YYYY'),105,15);
 ----===================
 BEGIN
 FOR i IN 21..1000 LOOP

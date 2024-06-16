@@ -397,4 +397,24 @@ set arraysize 300
 set autotrace traceonly
 select idstoc,tipstoc from stocuri where tipstoc = 'consumabil';
 
+--===========
+drop index fisemedicale_test;
+drop index index_angajati_test;
+drop index index_tratament_test;
+
+create index fisemedicale_test on fisemedicale(varsta ); 
+create index index_angajati_test on angajati(dataangajare, post);
+create index index_tratament_test on tratamente(denumiretratament);
+SELECT a.idangajat, a.dataangajare, a.post, f.idfisamedicala, f.varsta, t.denumiretratament, ft.dataadministrare
+FROM angajati a
+JOIN fisemedicale f ON a.idangajat = f.angajati_idangajat
+JOIN fisamedicala_tratament ft ON f.idfisamedicala = ft.fisemedicale_idfisamedicala
+JOIN tratamente t ON ft.tratamente_idtratament = t.idtratament
+WHERE f.varsta > 66
+ORDER BY f.varsta;
+
+--------
+
+
+
 

@@ -346,10 +346,39 @@ TABLESPACE oracle_user_backup_tbs AS SELECT * FROM fisamedicala_tratament ;
 INSERT INTO ANGAJATI_BACKUP SELECT t.* FROM ANGAJATI_BACKUP t CROSS JOIN angajati_backup;
 
 --============================================--
+set arraysize 300
+set autotrace traceonly
+select idsituatie,cantitateintrare,cantitateconsumata,necesaraprovizionare,dataprimirestoc from situatiestocuri;
+drop index index_situatiestocuri_test;
+Create index index_situatiestocuri_test on situatiestocuri(idsituatie,cantitateintrare,cantitateconsumata, necesaraprovizionare,dataprimirestoc);
+
 
 set arraysize 300
 set autotrace traceonly
-select idstoc,tipstoc,situatiestocuri_idsituatie from stocuri;
+set linesize 200
+select idstoc, tipstoc, situatiestocuri_idsituatie FROM stocuri;
+drop index index_stocuri_test;
+Create index index_stocuri_test on stocuri(idstoc,tipstoc,situatiestocuri_idsituatie);
+
+
+set arraysize 300
+set autotrace traceonly
+set linesize 200
+select idfisamedicala, seriecip,greutate from fisemedicale;
+drop index index_fisemedicale_test;
+create index index_fisemedicale_test on fisemedicale(idfisamedicala, seriecip,greutate);
+
+
+--=======---
+
+
+drop index fisemedicale_test
+Create  index fisemedicale_test on fisemedicale(greutate);
+
+set arraysize 300
+set autotrace traceonly
+SELECT * FROM fisemedicale WHERE greutate < 50;
+
 
 
 

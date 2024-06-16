@@ -451,6 +451,15 @@ startup mount
 alter database archivelog;
 
 
+mkdir -p oracle_user_backup
+cp /u01/app/oracle/oradata/ORCL/datafile/oracle_user_test.dbf oracle_user_backup/
+ls -l oracle_user_backup
+
+SELECT 'cp ' || file_name || ' oracle_user_backup'
+     FROM dba_data_files 
+     WHERE tablespace_name = 'ORACLE_USER_TBS';
+
+
 
 
 

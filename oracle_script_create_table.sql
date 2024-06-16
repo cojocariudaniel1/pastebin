@@ -459,6 +459,7 @@ SELECT 'cp ' || file_name || ' oracle_user_backup'
      FROM dba_data_files 
      WHERE tablespace_name = 'ORACLE_USER_TBS';
 
+cp oracle_user_backup/oracle_user_test.dbf /u01/app/oracle/oradata/ORCL/datafile/
 
 
 

@@ -202,74 +202,37 @@ INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,d
 INSERT INTO FISEMEDICALE(idfisamedicala,sex,culoare,seriecip,greutate,inaltime,datanastere,varsta, angajati_idangajat) VALUES(15,'F','rosu',178350,19.2,0.40,TO_DATE('16/02/2021','DD/MM/YYYY'),1,11);
 
 DECLARE
-  -- Variables for product names and idtratament
-  product_names VARCHAR2(100);
-  new_id NUMBER;
+    random_n NUMBER;
+    tratament VARCHAR2(50);
 BEGIN
-  -- Insert tratamente (assuming there are already 100 treatments with IDs from 1 to 100)
-  FOR i IN 1..100 LOOP
-    INSERT INTO tratamente (idtratament, denumiretratament) 
-    VALUES (i, 'Tratament ' || i);
-  END LOOP;
-  
-  -- Insert 5 random medical products
-  FOR j IN 1..5 LOOP
-    -- Generate a new unique idtratament
-    SELECT MAX(idtratament) + 1 INTO new_id FROM tratamente;
-    IF new_id IS NULL THEN
-      new_id := 101; -- If table is empty, start from 101
-    END IF;
-    
-    -- Example placeholder names for demonstration
-    product_names := CASE j
-                      WHEN 1 THEN 'Paracetamol'
-                      WHEN 2 THEN 'Ibuprofen'
-                      WHEN 3 THEN 'Aspirin'
-                      WHEN 4 THEN 'Antibiotic'
-                      WHEN 5 THEN 'Cough Syrup'
-                    END;
-    
-    INSERT INTO tratamente (idtratament, denumiretratament)
-    VALUES (new_id, product_names);
-  END LOOP;
-  
-  -- Commit changes
-  COMMIT;
-END;
-
--- Definește un tip de tabel pentru a stoca denumirile tratamentelor posibile
-CREATE OR REPLACE TYPE denumiri_tratamente_t AS TABLE OF VARCHAR2(50);
-/
-
--- Inserează denumirile tratamentelor posibile într-un obiect de tip tabel
-DECLARE
-    denumiri_tratamente denumiri_tratamente_t := denumiri_tratamente_t(
-        'Paracetamol',
-        'Ibuprofen',
-        'Aspirin',
-        'Antibiotic',
-        'Sirop de tuse',
-        -- Poți adăuga și alte denumiri aici
-    );
-    num_entries CONSTANT INTEGER := 1000;
-BEGIN
-    FOR i IN 1..num_entries LOOP
-        -- Selectează 5 denumiri aleatorii din lista de denumiri
-        INSERT INTO tratamente (idtratament, denumiretratament)
-        SELECT i, column_value
-        FROM TABLE(
-            CAST(
-                MULTISET(
-                    SELECT column_value
-                    FROM TABLE(denumiri_tratamente)
-                    SAMPLE(5)
-                ) AS denumiri_tratamente_t
-            )
+    FOR i IN 100..300 LOOP
+        random_n := TRUNC(dbms_random.value(1, 6)); -- Generează un număr aleatoriu între 1 și 5
+        
+        IF random_n = 1 THEN
+            tratament := 'Paracetamol';
+        ELSIF random_n = 2 THEN
+            tratament := 'Ibuprofen';
+        ELSIF random_n = 3 THEN
+            tratament := 'Aspirin';
+        ELSIF random_n = 4 THEN
+            tratament := 'Antibiotic';
+        ELSIF random_n = 5 THEN
+            tratament := 'Sirop de tuse';
+        ELSE
+            tratament := 'Tratament necunoscut'; -- În caz că nu se potrivește nicio condiție
+        END IF;
+        
+        -- Inserare în tabel
+        INSERT INTO tratamente (
+          idtratament, denumiretratament
+        ) VALUES (
+          i, tratament
         );
     END LOOP;
+    
     COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Înregistrările au fost inserate cu succes.');
 END;
-/
 
 --inserturi fisamedicala_tratament
 BEGIN

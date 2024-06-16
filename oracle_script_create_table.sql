@@ -378,20 +378,23 @@ set arraysize 300
 set autotrace traceonly
 SELECT * FROM fisemedicale WHERE greutate < 50;
 
-
-
 drop index tratamente_test;
 Create  index tratamente_test on Tratamente(Denumiretratament);
 set arraysize 300
 set autotrace traceonly
 SELECT * From Tratamente Where Denumiretratament Like 'Paracetamol';
 
-
-drop index situatiestocuri_test;
-Create index situatiestocuri_test on situatiestocuri(necesaraprovizionare, idsituatie);
-
+drop index index_situatiestocuri_test;
+Create index index_situatiestocuri_test on situatiestocuri(necesaraprovizionare, idsituatie);
 set arraysize 300
 set autotrace traceonly
 SELECT idsituatie, necesaraprovizionare FROM situatiestocuri WHERE necesaraprovizionare > 99;
+
+
+drop index index_stocuri_test;
+Create index index_stocuri_test on stocuri(idstoc,tipstoc);
+set arraysize 300
+set autotrace traceonly
+select idstoc,tipstoc from stocuri where tipstoc = 'consumabil';
 
 

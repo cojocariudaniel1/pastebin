@@ -289,13 +289,28 @@ SELECT SEGMENT_NAME, tablespace_name from user_segments where segment_type = 'IN
 
 --============================================--
 
+CREATE TABLE STOCURI_BACK_UP 
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM stocuri;
 
-CREATE TABLE STOCURI_BACK_UP
-TABLESPACE test1_backup_tbs AS SELECT * FROM stocuri;
 CREATE TABLE tratamente_backup
-TABLESPACE test1_backup_tbs AS SELECT * FROM tratamente;
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM tratamente;
+
 CREATE TABLE ANGAJATI_BACKUP
-TABLESPACE test1_backup_tbs AS SELECT * FROM angajati;
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM angajati;
+
+CREATE TABLE TRATAMENTE_STOC_BACKUP
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM tratament_stoc;
+
+CREATE TABLE FISEMEDICALE_BACKUP
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM fisemedicale ;
+
+
+CREATE TABLE SITUATIESTOCURI_BACKUP
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM situatiestocuri ;
+
+
+CREATE TABLE FISAMEDICALA_TRATAMENT_BACKUP
+TABLESPACE oracle_user_backup_tbs AS SELECT * FROM fisamedicala_tratament ;
 
 INSERT INTO ANGAJATI_BACKUP SELECT t.* FROM ANGAJATI_BACKUP t CROSS JOIN angajati_backup;
 
